@@ -61,8 +61,10 @@ shape your school already uses, so there's nothing left to reformat.
 
 The image search defaults to CC0, Public Domain Mark, and CC-BY. CC0 and public-domain
 images need no attribution; CC-BY images do, so attribution is recorded in the slide notes
-for every image and you should keep it visible. To restrict to no-attribution-required
-images only, pass `--license cc0,pdm`.
+for every image, and a small credit line is added **on the slide itself** for CC-BY images
+automatically. To restrict to no-attribution-required images only, pass `--license cc0,pdm`.
+On-slide credit is controlled by `build_deck.py --credit-on-slide {auto,always,off}`
+(default `auto` = CC-BY only).
 
 ## This is version one
 

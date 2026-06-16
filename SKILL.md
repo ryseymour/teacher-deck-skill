@@ -65,8 +65,9 @@ you assumed.
    ```
    This returns CC0, public-domain, and CC-BY results from Openverse with attribution.
    Put the downloaded path in the slide's `image` field and the returned attribution in
-   `image_credit`. CC0/public-domain need no credit; CC-BY does, so keep its attribution
-   visible (it goes into the slide notes automatically).
+   `image_credit`. CC0/public-domain need no credit; CC-BY does, and `build_deck.py`
+   automatically adds a small on-slide credit line for CC-BY images (and records every
+   credit in the notes regardless).
    - **If nothing suitable comes back, do not silently invent an image.** Tell the
      teacher, then draft a generation prompt and show it to them to adjust before you
      generate. Images usually take a couple of rounds to match what the lesson is

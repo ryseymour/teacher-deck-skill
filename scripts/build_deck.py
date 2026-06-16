@@ -18,6 +18,7 @@ import sys
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.enum.shapes import PP_PLACEHOLDER
+from pptx.dml.color import RGBColor
 
 
 def load_lesson(path):
@@ -116,7 +117,33 @@ def write_notes(slide, parts):
     slide.notes_slide.notes_text_frame.text = text
 
 
-def build(template, lesson, out, keep_template_slides=False):
+def requires_visible_credit(credit):
+    """True for licenses that require visible attribution (CC-BY, CC-BY-SA, etc.)."""
+    if not credit:
+        return False
+    c = credit.lower()
+    if "cc0" in c or "public domain" in c or "pdm" in c:
+        return False
+    return "cc by" in c or "cc-by" in c
+
+
+def add_credit_caption(slide, prs, text):
+    """Place a small, gray attribution line along the bottom of the slide."""
+    left = Inches(0.3)
+    width = prs.slide_width - Inches(0.6)
+    top = prs.slide_height - Inches(0.45)
+    box = slide.shapes.add_textbox(left, top, width, Inches(0.3))
+    tf = box.text_frame
+    tf.word_wrap = True
+    para = tf.paragraphs[0]
+    para.text = text
+    run = para.runs[0]
+    run.font.size = Pt(8)
+    run.font.italic = True
+    run.font.color.rgb = RGBColor(0x80, 0x80, 0x80)
+
+
+def build(template, lesson, out, keep_template_slides=False, credit_on_slide="auto"):
     prs = Presentation(template)
     if not keep_template_slides:
         clear_slides(prs)
@@ -140,9 +167,18 @@ def build(template, lesson, out, keep_template_slides=False):
             notes_parts.append(spec["notes"])
         if spec.get("check_for_understanding"):
             notes_parts.append("Check for understanding: " + spec["check_for_understanding"])
-        if spec.get("image_credit"):
-            notes_parts.append("Image: " + spec["image_credit"])
+        credit = spec.get("image_credit")
+        if credit:
+            notes_parts.append("Image: " + credit)
         write_notes(slide, notes_parts)
+
+        if image and credit:
+            show = credit_on_slide == "always" or (
+                credit_on_slide == "auto" and requires_visible_credit(credit)
+            )
+            if show:
+                add_credit_caption(slide, prs, credit)
+
         print(f"  slide {i}: '{spec.get('title', '(untitled)')}' on layout '{layout.name}'")
 
     prs.save(out)
@@ -159,8 +195,22 @@ def main():
         action="store_true",
         help="Keep the template's existing slides instead of replacing them.",
     )
+    ap.add_argument(
+        "--credit-on-slide",
+        choices=["auto", "always", "off"],
+        default="auto",
+        help="Show image attribution on the slide face. 'auto' (default) does it only for "
+        "licenses that require visible credit (CC-BY); 'always' for every credited image; "
+        "'off' keeps all credit in the notes only.",
+    )
     args = ap.parse_args()
-    build(args.template, load_lesson(args.lesson), args.out, args.keep_template_slides)
+    build(
+        args.template,
+        load_lesson(args.lesson),
+        args.out,
+        args.keep_template_slides,
+        args.credit_on_slide,
+    )
 
 
 if __name__ == "__main__":
