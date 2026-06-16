@@ -1,0 +1,58 @@
+{
+  "deck_title": "Trait Tracker: How Living Things Pass On Traits",
+  "subject": "Science",
+  "grade": "Grade 3",
+  "differentiation": "Two reading levels; sentence frames for emerging readers; an extension question for early finishers.",
+  "slides": [
+    {
+      "layout": "Title Slide",
+      "title": "Trait Tracker",
+      "bullets": ["How living things pass on their traits", "Grade 3 Science"],
+      "notes": "Suggested time: 1 min. Welcome routine while the class settles."
+    },
+    {
+      "layout": "Title and Content",
+      "title": "Do Now",
+      "bullets": [
+        "Look at the puppy and its parents on the board.",
+        "What do you notice that looks the same?"
+      ],
+      "notes": "Suggested time: 4 min. Opening check-for-understanding routine. Emerging readers: offer the sentence frame 'The puppy and its parent both have ___.'",
+      "check_for_understanding": "Can students name at least one shared trait between parent and offspring?"
+    },
+    {
+      "layout": "Title and Content",
+      "title": "What Is a Trait?",
+      "bullets": [
+        "A trait is something you can observe about a living thing.",
+        "Some traits come from parents.",
+        "Some traits change with the environment."
+      ],
+      "image": "images/hook.jpg",
+      "image_credit": "Openly licensed illustration via Openverse (CC0).",
+      "notes": "Suggested time: 6 min. Anchor the vocabulary word 'trait'. On-level readers define in their own words; emerging readers match trait cards to pictures."
+    },
+    {
+      "layout": "Title and Content",
+      "title": "Activity: Track the Trait",
+      "bullets": [
+        "1. Pick an animal card.",
+        "2. List two traits you can observe.",
+        "3. Decide: inherited or from the environment?",
+        "4. Share with your partner."
+      ],
+      "image": "images/activity.jpg",
+      "image_credit": "Openly licensed photo via Openverse (CC0).",
+      "notes": "Suggested time: 12 min. The step-by-step routine pulled from the lesson plan. Extension for early finishers: find a trait that could be both inherited and shaped by the environment."
+    },
+    {
+      "layout": "Title and Content",
+      "title": "Wrap Up",
+      "bullets": [
+        "Inherited traits come from parents.",
+        "Some traits are shaped by where a living thing lives."
+      ],
+      "notes": "Suggested time: 3 min. Exit ticket: each student writes one inherited trait and one environmental trait."
+    }
+  ]
+}

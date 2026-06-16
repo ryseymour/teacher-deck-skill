@@ -1,0 +1,8 @@
+# Working files teachers will generate locally
+images/
+*.pptx
+!examples/*.pptx
+__pycache__/
+*.pyc
+.DS_Store
+lesson.json
