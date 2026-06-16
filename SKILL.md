@@ -63,9 +63,10 @@ you assumed.
    ```
    python3 scripts/find_images.py "search terms" --download images/
    ```
-   This returns CC0 / public-domain results from Openverse with attribution. Put the
-   downloaded path in the slide's `image` field and the returned attribution in
-   `image_credit`.
+   This returns CC0, public-domain, and CC-BY results from Openverse with attribution.
+   Put the downloaded path in the slide's `image` field and the returned attribution in
+   `image_credit`. CC0/public-domain need no credit; CC-BY does, so keep its attribution
+   visible (it goes into the slide notes automatically).
    - **If nothing suitable comes back, do not silently invent an image.** Tell the
      teacher, then draft a generation prompt and show it to them to adjust before you
      generate. Images usually take a couple of rounds to match what the lesson is
@@ -92,8 +93,9 @@ teacher can spend their attention on the parts no model should touch.
 - **Match, don't reinvent.** Reuse the template's layouts and routine. If the model output
   lands "just outside" the school's shape, the teacher is back to reformatting and the
   time savings disappear.
-- **Be honest about images.** Prefer CC0 / public domain. Record attribution even when a
-  license does not require it. Never present an unclear license as cleared.
+- **Be honest about images.** CC0, public domain, and CC-BY are all fine; CC-BY just needs
+  its credit kept visible. Record attribution even when a license does not require it.
+  Never present an unclear license as cleared.
 - **Reprompt freely.** This Skill is meant to be adjusted. If something is missing,
   change the lesson JSON or the instructions and rebuild.
 - **Portable.** This is just a text file plus scripts. It is written for Claude, but the

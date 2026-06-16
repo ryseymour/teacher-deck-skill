@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Search openly-licensed images (Openverse) for a lesson, license-first.
 
-Defaults to CC0 and Public Domain Mark so results are safe to use without attribution,
-though attribution is still returned and should be recorded. No API key required.
+Defaults to CC0, Public Domain Mark, and CC-BY. CC0/PDM need no attribution; CC-BY does,
+so attribution is returned for every result and should be kept visible (it is written
+into the slide notes by build_deck.py). Pass --license cc0,pdm to restrict to images that
+need no credit at all. No API key required.
 
 Usage:
     python3 find_images.py "water cycle diagram"
@@ -26,7 +28,7 @@ API = "https://api.openverse.org/v1/images/"
 UA = {"User-Agent": "teacher-deck-skill (https://github.com/ryseymour/teacher-deck-skill)"}
 
 
-def search(query, license_codes="cc0,pdm", n=5):
+def search(query, license_codes="cc0,pdm,by", n=5):
     params = {"q": query, "license": license_codes, "page_size": n, "mature": "false"}
     resp = requests.get(API, params=params, headers=UA, timeout=30)
     resp.raise_for_status()
@@ -71,9 +73,10 @@ def main():
     ap.add_argument("query", help="Search terms")
     ap.add_argument(
         "--license",
-        default="cc0,pdm",
-        help="Comma-separated Openverse license codes (default: cc0,pdm). "
-        "Add 'by','by-sa' to widen, but those require visible attribution.",
+        default="cc0,pdm,by",
+        help="Comma-separated Openverse license codes (default: cc0,pdm,by). "
+        "cc0/pdm need no attribution; by (CC-BY) requires visible credit. "
+        "Pass 'cc0,pdm' to restrict to no-attribution images only.",
     )
     ap.add_argument("--n", type=int, default=5, help="Number of results (default 5)")
     ap.add_argument("--download", metavar="DIR", help="Download results into DIR")

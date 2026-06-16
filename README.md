@@ -59,9 +59,10 @@ shape your school already uses, so there's nothing left to reformat.
 
 ## A note on images
 
-The image search defaults to CC0 and Public Domain Mark, so results are safe to use, and
-attribution is recorded in the slide notes even when a license doesn't require it. If you
-widen the license filter to `by`/`by-sa`, keep that attribution visible.
+The image search defaults to CC0, Public Domain Mark, and CC-BY. CC0 and public-domain
+images need no attribution; CC-BY images do, so attribution is recorded in the slide notes
+for every image and you should keep it visible. To restrict to no-attribution-required
+images only, pass `--license cc0,pdm`.
 
 ## This is version one
 
