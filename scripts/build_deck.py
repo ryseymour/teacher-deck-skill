@@ -13,6 +13,7 @@ See references/lesson_schema.md for the lesson JSON shape.
 """
 import argparse
 import json
+import os
 import sys
 
 from pptx import Presentation
@@ -94,8 +95,14 @@ def add_bullets(slide, bullets):
         para.text = str(line)
 
 
-def add_image(slide, image_path):
-    """Insert into a picture placeholder if present, else float a sized picture."""
+def add_image(slide, image_path, prs):
+    """Insert into a picture placeholder if present, else float a picture scaled to fit."""
+    if str(image_path).lower().endswith(".svg"):
+        sys.stderr.write(
+            f"  ! skipping SVG image {image_path}: PowerPoint cannot embed SVG. "
+            "Convert it to PNG or JPG first.\n"
+        )
+        return
     for ph in slide.placeholders:
         try:
             if ph.placeholder_format.type == PP_PLACEHOLDER.PICTURE:
@@ -103,11 +110,19 @@ def add_image(slide, image_path):
                 return
         except (ValueError, Exception):
             continue
-    # No picture placeholder: place a reasonably sized image on the lower right.
+    # No picture placeholder: float the picture in the lower-right, scaled to fit a box
+    # so it never runs off the slide edge or collides with the title.
     try:
-        slide.shapes.add_picture(image_path, Inches(5.2), Inches(2.2), height=Inches(3.6))
+        pic = slide.shapes.add_picture(image_path, 0, 0)
     except Exception as exc:  # noqa: BLE001
         sys.stderr.write(f"  ! could not add image {image_path}: {exc}\n")
+        return
+    max_w, max_h = Inches(4.2), Inches(3.2)
+    scale = min(max_w / pic.width, max_h / pic.height)
+    pic.width = int(pic.width * scale)
+    pic.height = int(pic.height * scale)
+    pic.left = int(prs.slide_width - pic.width - Inches(0.4))
+    pic.top = int(prs.slide_height - pic.height - Inches(0.7))
 
 
 def write_notes(slide, parts):
@@ -124,7 +139,7 @@ def requires_visible_credit(credit):
     c = credit.lower()
     if "cc0" in c or "public domain" in c or "pdm" in c:
         return False
-    return "cc by" in c or "cc-by" in c
+    return "cc by" in c or "cc-by" in c or "/licenses/" in c
 
 
 def add_credit_caption(slide, prs, text):
@@ -143,7 +158,7 @@ def add_credit_caption(slide, prs, text):
     run.font.color.rgb = RGBColor(0x80, 0x80, 0x80)
 
 
-def build(template, lesson, out, keep_template_slides=False, credit_on_slide="auto"):
+def build(template, lesson, out, lesson_dir=".", keep_template_slides=False, credit_on_slide="auto"):
     prs = Presentation(template)
     if not keep_template_slides:
         clear_slides(prs)
@@ -160,7 +175,9 @@ def build(template, lesson, out, keep_template_slides=False, credit_on_slide="au
 
         image = spec.get("image")
         if image:
-            add_image(slide, image)
+            if not os.path.isabs(image):
+                image = os.path.join(lesson_dir, image)
+            add_image(slide, image, prs)
 
         notes_parts = []
         if spec.get("notes"):
@@ -208,6 +225,7 @@ def main():
         args.template,
         load_lesson(args.lesson),
         args.out,
+        os.path.dirname(os.path.abspath(args.lesson)),
         args.keep_template_slides,
         args.credit_on_slide,
     )

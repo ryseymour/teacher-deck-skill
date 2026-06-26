@@ -59,7 +59,12 @@ python3 scripts/find_images.py "water cycle diagram" --download images/
 python3 scripts/build_deck.py --template your_template.pptx --lesson lesson.json --out deck.pptx
 ```
 
-A worked Grade 3 science example is in `examples/lesson.example.json`.
+A worked Grade 3 science example ships in `examples/`. To try it immediately with the
+bundled template and sample image:
+
+```bash
+python3 scripts/build_deck.py --template examples/sample_template.pptx --lesson examples/lesson.example.json --out deck.pptx
+```
 
 ## System Features
 
