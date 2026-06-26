@@ -1,79 +1,87 @@
-# Teacher Deck Builder — an AI Skill
+# Teacher Deck Builder: An AI-Assisted System
 
-Take a lesson plan you found online and rebuild it as a slide deck **in your school's
-template** — same layouts, same opening routine — instead of losing half an hour
-reformatting it by hand.
+This project is a portable AI Agent Skill designed to bridge the gap between generic AI
+content and classroom-ready materials.
 
-This is a free, portable [Agent Skill](https://www.anthropic.com/news/skills): a text
-file (`SKILL.md`) plus a few small Python scripts. It is written for Claude, but because
-it is just instructions you can paste the contents into whatever AI tool you use and it
-should behave similarly.
+Most teachers face a "rework trap": they use AI to generate a lesson, but the output is
+generic and fails to align with their school's existing templates, fonts, or lesson
+structure. They end up spending more time formatting the AI output than they would have
+spent building the lesson from scratch.
 
-It pairs with the Substack post *"Introducing AI Skills: A Practical Workflow for
-Teachers."*
+This system solves that problem. It takes a lesson plan from any source and rebuilds it
+directly inside your school's specific PowerPoint template.
 
-## What it does
+## The Workflow: Brief → Build → Check
 
-Following a **Brief → Build → Check** workflow:
+This system operates on a human-in-the-loop framework. The goal is not to replace the
+teacher, but to automate the constraint-fitting that needlessly consumes prep time.
 
-- **Brief.** Asks for three things: an example deck in your school's template, the lesson
-  plan (with subject, grade, and your differentiation focus), and any opening routine or
-  check-for-understanding you run every class.
-- **Build.** Reads your template's real layouts, maps the lesson onto them, sources
-  **openly-licensed (CC0) images** — and when it can't find one, drafts a generation
-  prompt for you to approve rather than inventing something. Writes **teacher notes**
-  (timing and differentiation) into each slide's notes pane.
-- **Check.** Hands the deck back for you to read against your standards. You own the final
-  call, and you can reprompt to adjust anything.
+- **Brief.** You provide the AI with your specific context: a sample deck in your school
+  template, the lesson plan, and your preferred routines for checking understanding.
+- **Build.** The agent reads your template's actual layouts and maps the lesson content
+  onto them. It sources openly-licensed (CC0) images, writes teacher notes (including
+  timing and differentiation) into the slides, and generates image-generation prompts for
+  you to review if the right media is missing.
+- **Check.** You own the final call. The output is a formatted deck that lands exactly in
+  the shape your school requires, leaving no reformatting for you to do.
 
-## Use it with Claude
+## How to use it
 
-1. Download this repo (or just `SKILL.md`).
-2. Point Claude at `SKILL.md` (upload it, or paste its contents).
-3. Say: *"Turn this lesson into slides in my school's template,"* and share your template
-   and lesson when asked.
+### Option 1: The Agent Approach (Claude)
 
-## Use the scripts directly
+This is an Agent Skill file (`SKILL.md`) plus a set of Python scripts.
+
+1. Download this repository, or copy the contents of `SKILL.md`.
+2. Upload or paste the contents into your preferred AI agent (Claude is recommended).
+3. Give the instruction: *"Turn this lesson into slides in my school's template,"* and
+   provide your files when prompted.
+
+### Option 2: The Script Approach
+
+For more control, run the Python scripts directly.
 
 ```bash
+# 1. Install dependencies
 pip install -r scripts/requirements.txt
 
-# 1. See your template's layouts and placeholders
+# 2. Inspect your template's available layouts
 python3 scripts/inspect_template.py your_template.pptx
 
-# 2. Find openly-licensed images
+# 3. Find openly-licensed images
 python3 scripts/find_images.py "water cycle diagram" --download images/
 
-# 3. Build the deck from a lesson JSON (see references/lesson_schema.md)
+# 4. Build the deck
 python3 scripts/build_deck.py --template your_template.pptx --lesson lesson.json --out deck.pptx
 ```
 
 A worked Grade 3 science example is in `examples/lesson.example.json`.
 
-## How it matches your template
+## System Features
 
-`build_deck.py` opens your example `.pptx` as the base, so it inherits the theme, fonts,
-colors, and slide layouts. It clears the example's slides (keeping the design) and adds
-new ones on the layouts you name. That is the whole point: the output lands *inside* the
-shape your school already uses, so there's nothing left to reformat.
+### Template-Aware Formatting
 
-## A note on images
+The `build_deck.py` script opens your existing `.pptx` file as the base. It inherits your
+fonts, theme, and colors, then clears the example slides while keeping the design. The
+generated output requires zero manual formatting.
 
-The image search defaults to CC0, Public Domain Mark, and CC-BY. CC0 and public-domain
-images need no attribution; CC-BY images do, so attribution is recorded in the slide notes
-for every image, and a small credit line is added **on the slide itself** for CC-BY images
-automatically. To restrict to no-attribution-required images only, pass `--license cc0,pdm`.
-On-slide credit is controlled by `build_deck.py --credit-on-slide {auto,always,off}`
-(default `auto` = CC-BY only).
+### Media Attribution
 
-## This is version one
+The image search defaults to CC0, Public Domain, and CC-BY licenses. Attribution is
+recorded in the slide notes for every image, and a small credit line is added to the slide
+automatically for CC-BY assets. You can restrict searches to no-attribution-required
+images by passing `--license cc0,pdm`.
 
-It's meant to be adjusted. Try it on your next lesson and tell me where it breaks. The
-places it falls short in your classroom are exactly what will make the next version
-better. Issues and pull requests welcome, and if GitHub isn't your thing, **[share quick
-feedback here](https://docs.google.com/forms/d/e/1FAIpQLSc0LG3JEm_2PCY18Zf730smPIEi8_jNwCVoUVjaQdL2RpE5Lg/viewform)**.
+### Differentiation Support
+
+Differentiation techniques and timing are mapped from the lesson source directly into the
+slide notes, supporting the teacher without cluttering the student-facing view.
+
+## Feedback
+
+This is version one, and it is meant to be adjusted. Try it on your next lesson and tell me
+where it breaks. Issues and pull requests are welcome, and if GitHub isn't your thing,
+**[share quick feedback here](https://docs.google.com/forms/d/e/1FAIpQLSc0LG3JEm_2PCY18Zf730smPIEi8_jNwCVoUVjaQdL2RpE5Lg/viewform)**.
 
 ## License
 
-[MIT](LICENSE). Built by [Ryan Seymour](https://github.com/ryseymour), Seymour Learning
-Insights.
+[MIT](LICENSE). Built by [Ryan Seymour](https://github.com/ryseymour), Seymour Learning Insights.
