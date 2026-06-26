@@ -11,10 +11,15 @@ spent building the lesson from scratch.
 This system solves that problem. It takes a lesson plan from any source and rebuilds it
 directly inside your school's specific PowerPoint template.
 
+This tool is introduced in the Substack post [AI Skills: A Practical Workflow for
+Teachers](https://ryseymour.substack.com/p/introducing-ai-skills-a-practical).
+
 ## The Workflow: Brief → Build → Check
 
 This system operates on a human-in-the-loop framework. The goal is not to replace the
-teacher, but to automate the constraint-fitting that needlessly consumes prep time.
+teacher, but to automate the constraint-fitting that needlessly consumes prep time. The
+briefing-first idea, getting AI to work inside the systems teachers already use, is the
+subject of [Guided AI Gains](https://ryseymour.substack.com/p/guided-ai-gains).
 
 - **Brief.** You provide the AI with your specific context: a sample deck in your school
   template, the lesson plan, and your preferred routines for checking understanding.
