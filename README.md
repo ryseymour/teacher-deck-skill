@@ -68,9 +68,10 @@ On-slide credit is controlled by `build_deck.py --credit-on-slide {auto,always,o
 
 ## This is version one
 
-It's meant to be adjusted. Try it on your next lesson and tell me where it breaks — the
+It's meant to be adjusted. Try it on your next lesson and tell me where it breaks. The
 places it falls short in your classroom are exactly what will make the next version
-better. Issues and pull requests welcome.
+better. Issues and pull requests welcome, and if GitHub isn't your thing, **[share quick
+feedback here](https://docs.google.com/forms/d/e/1FAIpQLSc0LG3JEm_2PCY18Zf730smPIEi8_jNwCVoUVjaQdL2RpE5Lg/viewform)**.
 
 ## License
 
