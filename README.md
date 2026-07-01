@@ -59,7 +59,9 @@ python3 scripts/find_images.py "water cycle diagram" --download images/
 python3 scripts/build_deck.py --template your_template.pptx --lesson lesson.json --out deck.pptx
 ```
 
-A worked Grade 3 science example ships in `examples/`. To try it immediately with the
+A worked Grade 3 science example ships in `examples/`, adapted from OpenSciEd's openly
+licensed [Trait Variations unit](https://openscied.org/instructional-materials/3-3-trait-variations/)
+(images: CC0/PDM via [Openverse](https://openverse.org/)). To try it immediately with the
 bundled template and sample images:
 
 ```bash

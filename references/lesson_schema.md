@@ -12,6 +12,7 @@ plan and the template you inspected. Use the **real layout names** from
 | `subject`        | no       | e.g. "Science"                                               |
 | `grade`          | no       | e.g. "Grade 3"                                               |
 | `differentiation`| no       | The differentiation focus the teacher named.                 |
+| `source`         | no       | Attribution for the lesson content itself (name + URL + license), if it comes from an external resource. Informational only; not read by `build_deck.py`. |
 | `slides`         | **yes**  | Ordered list of slide objects (below).                       |
 
 ## Each slide object
