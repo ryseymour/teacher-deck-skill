@@ -60,7 +60,7 @@ python3 scripts/build_deck.py --template your_template.pptx --lesson lesson.json
 ```
 
 A worked Grade 3 science example ships in `examples/`. To try it immediately with the
-bundled template and sample image:
+bundled template and sample images:
 
 ```bash
 python3 scripts/build_deck.py --template examples/sample_template.pptx --lesson examples/lesson.example.json --out deck.pptx

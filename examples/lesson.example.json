@@ -1,58 +1,57 @@
 {
-  "deck_title": "Trait Tracker: How Living Things Pass On Traits",
+  "deck_title": "Trait Variations: Why Animals Look and Act the Way They Do",
   "subject": "Science",
   "grade": "Grade 3",
   "differentiation": "Two reading levels; sentence frames for emerging readers; an extension question for early finishers.",
   "slides": [
     {
       "layout": "Title Slide",
-      "title": "Trait Tracker",
-      "bullets": ["How living things pass on their traits", "Grade 3 Science"],
+      "title": "Trait Variations",
+      "bullets": ["Why animals look and act the way they do", "Grade 3 Science"],
       "notes": "Suggested time: 1 min. Welcome routine while the class settles."
     },
     {
       "layout": "Title and Content",
       "title": "Do Now",
       "bullets": [
-        "Look at the puppy and its parents on the board.",
-        "What do you notice that looks the same?"
+        "Look at the mother duck and her ducklings on the board.",
+        "What do you notice that looks the same? What looks different?"
       ],
-      "notes": "Suggested time: 4 min. Opening check-for-understanding routine. Emerging readers: offer the sentence frame 'The puppy and its parent both have ___.'",
+      "image": "mallard-family.jpg",
+      "image_credit": "Public domain (PDM).",
+      "notes": "Suggested time: 4 min. Opening check-for-understanding routine. Emerging readers: offer the sentence frame 'The ducklings and their mother both have ___.'",
       "check_for_understanding": "Can students name at least one shared trait between parent and offspring?"
     },
     {
       "layout": "Title and Content",
-      "title": "What Is a Trait?",
+      "title": "What Shapes a Trait?",
       "bullets": [
         "A trait is something you can observe about a living thing.",
-        "Some traits come from parents.",
-        "Some traits change with the environment."
+        "Traits can be inherited from parents or shaped by environment."
       ],
-      "image": "sample_image.png",
-      "image_credit": "Bundled sample image (CC0).",
-      "notes": "Suggested time: 6 min. Anchor the vocabulary word 'trait'. On-level readers define in their own words; emerging readers match trait cards to pictures."
+      "image": "white-fox.jpg",
+      "image_credit": "CC0.",
+      "notes": "Suggested time: 6 min. Anchor vocabulary: 'inherited' vs. 'environmental' trait. Example: an arctic fox's white coat matches its snowy home. On-level readers define each term in their own words; emerging readers sort trait cards into two piles."
     },
     {
       "layout": "Title and Content",
-      "title": "Activity: Track the Trait",
+      "title": "Activity: Sort the Trait",
       "bullets": [
         "1. Pick an animal card.",
         "2. List two traits you can observe.",
-        "3. Decide: inherited or from the environment?",
-        "4. Share with your partner."
+        "3. Decide: inherited, environmental, or both?",
+        "4. Share your reasoning with your partner."
       ],
-      "image": "sample_image.png",
-      "image_credit": "Bundled sample image (CC0).",
-      "notes": "Suggested time: 12 min. The step-by-step routine pulled from the lesson plan. Extension for early finishers: find a trait that could be both inherited and shaped by the environment."
+      "notes": "Suggested time: 12 min. The step-by-step routine pulled from the lesson plan. Extension for early finishers: find a trait that could be shaped by both inheritance and environment."
     },
     {
       "layout": "Title and Content",
       "title": "Wrap Up",
       "bullets": [
         "Inherited traits come from parents.",
-        "Some traits are shaped by where a living thing lives."
+        "Environmental traits are shaped by where a living thing lives."
       ],
-      "notes": "Suggested time: 3 min. Exit ticket: each student writes one inherited trait and one environmental trait."
+      "notes": "Suggested time: 3 min. Exit ticket: each student writes one inherited trait and one environmental trait, using an animal of their choice."
     }
   ]
 }
