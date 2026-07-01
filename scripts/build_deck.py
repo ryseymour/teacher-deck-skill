@@ -15,6 +15,7 @@ import argparse
 import json
 import os
 import sys
+from copy import deepcopy
 
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -63,6 +64,27 @@ def pick_layout(prs, ref, default_idx=1):
         f"  ! layout '{ref}' not found; using '{layouts[min(default_idx, len(layouts) - 1)].name}'\n"
     )
     return layouts[min(default_idx, len(layouts) - 1)]
+
+
+def ensure_placeholders(slide, prs):
+    """Clone the title/body placeholders from the slide master if the slide's
+    layout doesn't provide them.
+
+    Some real-world templates (notably Google Slides exports) ship with only a
+    bare "Blank" layout that carries no title or body placeholder at all, even
+    though the underlying master defines them. Without this, set_title() and
+    add_bullets() silently do nothing since there's nowhere to put the text,
+    and the deck comes out with the images but none of the words. Cloning the
+    master's placeholder shapes onto the slide (keeping their idx so python-pptx
+    still recognizes them as the title/body placeholders) fixes that while
+    still inheriting the template's real theme, fonts, and colors.
+    """
+    existing_idxs = {ph.placeholder_format.idx for ph in slide.placeholders}
+    master = prs.slide_masters[0]
+    for ph in master.placeholders:
+        idx = ph.placeholder_format.idx
+        if idx in (0, 1) and idx not in existing_idxs:
+            slide.shapes._spTree.append(deepcopy(ph._element))
 
 
 def set_title(slide, title):
@@ -179,6 +201,7 @@ def build(template, lesson, out, lesson_dir=".", keep_template_slides=False, cre
     for i, spec in enumerate(slides, 1):
         layout = pick_layout(prs, spec.get("layout"))
         slide = prs.slides.add_slide(layout)
+        ensure_placeholders(slide, prs)
         set_title(slide, spec.get("title"))
         add_bullets(slide, spec.get("bullets"))
 
