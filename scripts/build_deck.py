@@ -28,9 +28,18 @@ def load_lesson(path):
 
 
 def clear_slides(prs):
-    """Remove existing slides but keep masters, layouts, and theme."""
+    """Remove existing slides but keep masters, layouts, and theme.
+
+    Removing the id from the slide list alone leaves the underlying slide part
+    orphaned but still registered in the package. If the new deck ends up with
+    the same slide count as the original template, python-pptx's next-available
+    partname counter collides with those orphaned parts and silently writes a
+    corrupt .pptx (duplicate zip entries) that some readers refuse to open.
+    Dropping the relationship lets the package actually free the partname.
+    """
     sld_id_lst = prs.slides._sldIdLst
     for sld_id in list(sld_id_lst):
+        prs.part.drop_rel(sld_id.rId)
         sld_id_lst.remove(sld_id)
 
 
